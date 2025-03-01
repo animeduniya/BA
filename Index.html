@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(45deg, #FF9A8B, #FFC3A0, #FF677D, #D4A5A5, #392F5A);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: moveParticle 5s ease-in-out infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes moveParticle {
+            0% { transform: translate(0, 0); opacity: 0.9; }
+            25% { transform: translate(100px, -50px); opacity: 0.6; }
+            50% { transform: translate(-100px, 100px); opacity: 0.3; }
+            75% { transform: translate(200px, -200px); opacity: 0.9; }
+            100% { transform: translate(0, 0); opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Function to generate random particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.width = `${Math.random() * 20 + 10}px`;
+            particle.style.height = particle.style.width;
+            particle.style.backgroundColor = `hsla(${Math.random() * 360}, 100%, 75%)`;
+            particle.style.top = `${Math.random() * window.innerHeight}px`;
+            particle.style.left = `${Math.random() * window.innerWidth}px`;
+
+            document.body.appendChild(particle);
+
+            // Remove particles after animation ends
+            setTimeout(() => {
+                particle.remove();
+            }, 5000);
+        }
+
+        // Create particles at intervals
+        setInterval(createParticle, 300);
+    </script>
+</body>
+</html>
